@@ -40,7 +40,7 @@ extern const uint8_t ff_sqrt_tab[256];
 #elif ARCH_MIPS
 #   include "mips/mathops.h"
 #elif ARCH_PPC
-#   include "ppc/mathops.h"
+//#   include "ppc/mathops.h"
 #elif ARCH_X86
 #   include "x86/mathops.h"
 #endif

@@ -40,6 +40,7 @@
 
 static int win32_open(const char *filename_utf8, int oflag, int pmode)
 {
+#if 0
     int fd;
     int num_chars;
     wchar_t *filename_w;
@@ -62,6 +63,7 @@ static int win32_open(const char *filename_utf8, int oflag, int pmode)
         return fd;
 
 fallback:
+#endif
     /* filename may be in CP_ACP */
     return _sopen(filename_utf8, oflag, SH_DENYNO, pmode);
 }
