@@ -264,7 +264,7 @@ static void pthread_cond_signal(pthread_cond_t *cond)
 
 static void w32thread_init(void)
 {
-#if _WIN32_WINNT < 0x0600
+#if 0
     HANDLE kernel_dll = GetModuleHandle(TEXT("kernel32.dll"));
     /* if one is available, then they should all be available */
     cond_init      =

@@ -115,6 +115,7 @@
       <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
       <AdditionalDependencies>xapilibd.lib;d3d9d.lib;d3dx9d.lib;xgraphicsd.lib;xboxkrnl.lib;xnetd.lib;xaudiod2.lib;xactd3.lib;x3daudiod.lib;xmcored.lib;xbdm.lib;vcompd.lib;avcodec.lib;avdevice.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>D:\Document\ppsspp_main\ffmpeg\Xbox\ppcD\lib</AdditionalLibraryDirectories>
+      <StackCommitSize>1048576</StackCommitSize>
     </Link>
     <Deploy>
       <DeploymentType>CopyToHardDrive</DeploymentType>

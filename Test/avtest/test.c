@@ -37,8 +37,9 @@
 #include <libavutil/timestamp.h>
 #include <libavformat/avformat.h>
 
+char p[AV_TS_MAX_STRING_SIZE];
+
 static inline char * _av_ts2timestr(int64_t ts, AVRational *tb) {
-	char p[AV_TS_MAX_STRING_SIZE];
 	return av_ts_make_time_string(p, ts, tb);
 }
 
@@ -194,10 +195,10 @@ int main (int argc_, char **argv_)
 {
 	int argc = 4;
 	char * argv[] = {
-		"game:\\test.xex",
-		"game:\\in.mp4",
-		"game:\\out.vid",
-		"game:\\out.aud"
+		"d:\\test.xex",
+		"d:\\test.avi",
+		"d:\\out.vid",
+		"d:\\out.aud"
 	};
 
 
@@ -215,6 +216,8 @@ int main (int argc_, char **argv_)
     src_filename = argv[1];
     video_dst_filename = argv[2];
     audio_dst_filename = argv[3];
+	
+	av_log_set_level(AV_LOG_DEBUG);
 
     /* register all formats and codecs */
     av_register_all();
