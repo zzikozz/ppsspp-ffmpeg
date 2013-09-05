@@ -104,6 +104,7 @@ static int use_color = -1;
 
 static void colored_fputs(int level, const char *str)
 {
+#if 0
     if (use_color < 0) {
 #if HAVE_SETCONSOLETEXTATTRIBUTE
         CONSOLE_SCREEN_BUFFER_INFO con_info;
@@ -126,6 +127,10 @@ static void colored_fputs(int level, const char *str)
                    !getenv("AV_LOG_FORCE_NOCOLOR");
 #endif
     }
+#else
+	// Xbox don't have getenv ... (crash)
+	use_color = 0;
+#endif	
 
     if (use_color == 1) {
         set_color(level);
