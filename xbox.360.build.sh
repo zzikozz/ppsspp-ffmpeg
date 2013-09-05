@@ -38,7 +38,6 @@ GENERAL="
     --disable-postproc
     --disable-doc
     --disable-pthreads
-    --enable-w32threads
     --disable-network
     --disable-everything
     --disable-encoders
@@ -48,6 +47,7 @@ GENERAL="
     --disable-protocols
     --disable-dxva2
 	--disable-altivec
+    --enable-w32threads
 "
 
 AUDIO_DECODERS="
@@ -246,7 +246,7 @@ echo "---- configure ----"
 echo "---- make clean ----"
 make clean
 echo "---- make install ----"
-make install 2>&1 | tee build.log
+make install -j3 2>&1 | tee build.log
 echo "---- rename and copy for ppsspp ----"
 if (isstaticlib) then
     pushd $PREFIX/lib

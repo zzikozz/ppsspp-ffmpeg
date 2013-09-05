@@ -21,11 +21,13 @@
 #include "libavutil/attributes.h"
 #include "libavcodec/videodsp.h"
 
+unsigned char   __dcbt( int offset, const void * base );
+
 static void prefetch_ppc(uint8_t *mem, ptrdiff_t stride, int h)
 {
     register const uint8_t *p = mem;
     do {
-        __asm__ volatile ("dcbt 0,%0" : : "r" (p));
+		__dcbt(0, p);
         p += stride;
     } while(--h);
 }

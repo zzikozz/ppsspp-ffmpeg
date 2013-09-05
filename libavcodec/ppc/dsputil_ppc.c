@@ -48,6 +48,10 @@ distinguish, and use dcbz (32 bytes) or dcbzl (one cache line) as required.
 see <http://developer.apple.com/technotes/tn/tn2087.html>
 and <http://developer.apple.com/technotes/tn/tn2086.html>
 */
+
+unsigned char   __dcbz128( int offset, const void * base );
+unsigned char   __dcbz( int offset, const void * base );
+
 static void clear_blocks_dcbz32_ppc(int16_t *blocks)
 {
     register int misal = ((unsigned long)blocks & 0x00000010);
@@ -60,7 +64,7 @@ static void clear_blocks_dcbz32_ppc(int16_t *blocks)
         i += 16;
     }
     for ( ; i < sizeof(int16_t)*6*64-31 ; i += 32) {
-        __asm__ volatile("dcbz %0,%1" : : "b" (blocks), "r" (i) : "memory");
+		__dcbz(i, blocks);
     }
     if (misal) {
         ((unsigned long*)blocks)[188] = 0L;
@@ -86,7 +90,7 @@ static void clear_blocks_dcbz128_ppc(int16_t *blocks)
     }
     else
         for ( ; i < sizeof(int16_t)*6*64 ; i += 128) {
-            __asm__ volatile("dcbzl %0,%1" : : "b" (blocks), "r" (i) : "memory");
+			__dcbz128(i, blocks);
         }
 }
 #else
@@ -97,6 +101,7 @@ static void clear_blocks_dcbz128_ppc(int16_t *blocks)
 #endif
 
 #if HAVE_DCBZL
+
 /* check dcbz report how many bytes are set to 0 by dcbz */
 /* update 24/06/2003 : replace dcbz by dcbzl to get
    the intended effect (Apple "fixed" dcbz)
@@ -120,7 +125,7 @@ static long check_dcbzl_effect(void)
 
     /* below the constraint "b" seems to mean "Address base register"
        in gcc-3.3 / RS/6000 speaks. seems to avoid using r0, so.... */
-    __asm__ volatile("dcbzl %0, %1" : : "b" (fakedata_middle), "r" (zero));
+	__dcbz128(zero, fakedata_middle);
 
     for (i = 0; i < 1024 ; i ++) {
         if (fakedata[i] == (char)0)
