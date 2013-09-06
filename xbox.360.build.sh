@@ -16,7 +16,7 @@
 ARCH=ppc
 
 PREFIX="./Xbox/${ARCH}"
-XBLIBS="xapilib.lib d3d9.lib d3dx9.lib xgraphics.lib xboxkrnl.lib xnet.lib xaudio2.lib xact3.lib x3daudio.lib xmcore.lib vcomp.lib"
+XBLIBS="xapilib.lib xboxkrnl.lib vcomp.lib"
 
 mkdir -p ${PREFIX}
 
@@ -48,6 +48,7 @@ GENERAL="
     --disable-dxva2
 	--disable-altivec
     --enable-w32threads
+	--enable-protocol=file
 "
 
 AUDIO_DECODERS="
@@ -241,7 +242,7 @@ params_dump PARAMS
 
 
 echo "---- configure ----"
-./configure --extra-cflags="-MT -IWindowsInclude" --extra-ldflags="$XBLIBS" $PARAMS
+./configure --extra-cflags="-MT -IXboxInclude" --extra-ldflags="$XBLIBS" $PARAMS
 
 echo "---- make clean ----"
 make clean

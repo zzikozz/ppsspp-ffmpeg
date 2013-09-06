@@ -244,7 +244,7 @@ params_dump PARAMS
 
 
 echo "---- configure ----"
-./configure --extra-cflags="-MTd -IWindowsInclude" --extra-ldflags="-DEBUG $XBLIBS" $PARAMS
+./configure --extra-cflags="-MTd -IXboxInclude" --extra-ldflags="-DEBUG $XBLIBS" $PARAMS
 
 echo "---- make clean ----"
 make clean
