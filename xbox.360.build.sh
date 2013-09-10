@@ -242,7 +242,7 @@ params_dump PARAMS
 
 
 echo "---- configure ----"
-./configure --extra-cflags="-MT -IXboxInclude" --extra-ldflags="$XBLIBS" $PARAMS
+./configure --extra-cflags="-MT -IXboxInclude -Ox -Ot" --extra-ldflags="$XBLIBS" $PARAMS
 
 echo "---- make clean ----"
 make clean
